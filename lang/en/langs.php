@@ -2,9 +2,7 @@
 
 return [
 
+    "Language" => "Language",
     "Select language" => "Select language",
-
-    "en" => "English",
-    "ru" => "русский",
 
 ];

@@ -3,27 +3,26 @@
 ```php
 php artisan vendor:publish --tag="laravel-lang-switcher-config"
 ```
-Select which variants of sections in you want. You can do it in *config/welcome-page.php*:
+Add language code and names to the config *config/laravel-lang-switcher.php*:
 ```json
-'sections' => [
-    'main' => 'v1',
-    'others' => [
-        [
-            'name' => 'how-it-works',
-            'variant' => 'v1',
-        ],
-        [
-          'name' => 'call-to-action',
-          'variant' => 'v2',
-        ],
+'languages' => [
+  'en' => 'English',
+  'ru' => 'русский',
+]
 ```
-by specifying order of sections and their variants.
 
-### Publish localization
+Include lang-switcher anywhere you want, for example in your footer:
 ```php
-php artisan vendor:publish --tag="laravel-lang-switcher-lang"
+ @include('laravel-lang-switcher::lang-switcher.index')
 ```
-Add local strings in *lang/vendor/welcome-page/en/<section-name-variant>.php* for selected sections.
+
+Add LangSwitcher middleware to middleware array in *app/Http/Kernel.php*:
+```php
+  protected $middleware = [
+        …
+        \Atin\LaravelLangSwitcher\Http\Middleware\LangSwitcher::class,
+    ];
+```
 
 # Publishing
 ### Localization

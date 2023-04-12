@@ -1,5 +1,10 @@
 <?php
 
 return [
-    'header_path' => ['en', 'ru']
+
+    'languages' => [
+        'en' => 'English',
+        'ru' => 'русский',
+    ]
+
 ];

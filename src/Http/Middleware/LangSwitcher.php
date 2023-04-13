@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\App;
 
 class LangSwitcher
 {
-    public function handle(Request $request, Closure $next): \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+    public function handle(Request $request, Closure $next): \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
     {
         if ($request->session()->has('locale')) {
             $locale = $request->session()->get('locale', 'en');

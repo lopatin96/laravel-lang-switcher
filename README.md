@@ -13,7 +13,11 @@ Add language code and names to the config *config/laravel-lang-switcher.php*:
 
 Include lang-switcher anywhere you want, for example in your footer:
 ```php
- @include('laravel-lang-switcher::lang-switcher.index')
+@include('laravel-lang-switcher::lang-switcher.index')
+
+// or
+
+@include('laravel-lang-switcher::lang-switcher.index', ['align' => 'right'])
 ```
 
 Add LangSwitcher middleware to middleware array in *app/Http/Kernel.php*:

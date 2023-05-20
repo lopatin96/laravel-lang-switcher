@@ -1,8 +1,8 @@
 <?php
 
-namespace Atin\LaravelSocialAuth\Traits;
+namespace Atin\LaravelLangSwitcher\Traits;
 
-use Atin\LaravelSocialAuth\Models\SocialAccount;
+use Atin\LaravelLangSwitcher\Models\SocialAccount;
 
 trait HasLocale
 {

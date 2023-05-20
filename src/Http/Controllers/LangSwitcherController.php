@@ -8,6 +8,10 @@ class LangSwitcherController extends Controller
     {
         if (in_array($locale, array_keys(config('laravel-lang-switcher.languages')), true)) {
             session(['locale' => $locale]);
+
+            if (auth()->check()) {
+                auth()->user()->update(['locale' => $locale]);
+            }
         }
 
         return redirect()->back();

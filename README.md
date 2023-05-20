@@ -41,6 +41,11 @@ class User extends Authenticatable
 ```
 
 # Publishing
+### Migrations
+```php
+php artisan vendor:publish --tag="laravel-lang-switcher-migrations"
+```
+
 ### Localization
 ```php
 php artisan vendor:publish --tag="laravel-lang-switcher-lang"

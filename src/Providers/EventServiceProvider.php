@@ -5,7 +5,7 @@ namespace Atin\LaravelLangSwitcher\Providers;
 use Atin\LaravelLangSwitcher\Events\LocaleWasChanged;
 use Atin\LaravelLangSwitcher\Listeners\UpdateUserLocale;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Login;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -13,7 +13,7 @@ class EventServiceProvider extends ServiceProvider
         LocaleWasChanged::class => [
             UpdateUserLocale::class,
         ],
-        Registered::class => [
+        Login::class => [
             UpdateUserLocale::class,
         ],
     ];

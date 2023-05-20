@@ -2,6 +2,7 @@
 
 namespace Atin\LaravelLangSwitcher;
 
+use Atin\LaravelLangSwitcher\Providers\EventServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class LangSwitcherProvider extends ServiceProvider
@@ -13,6 +14,7 @@ class LangSwitcherProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->app->register(EventServiceProvider::class);
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-lang-switcher');

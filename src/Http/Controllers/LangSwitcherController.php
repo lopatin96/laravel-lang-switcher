@@ -2,6 +2,8 @@
 
 namespace Atin\LaravelLangSwitcher\Http\Controllers;
 
+use Atin\LaravelLangSwitcher\Events\LocaleWasChanged;
+
 class LangSwitcherController extends Controller
 {
     public function __invoke(string $locale)
@@ -9,10 +11,7 @@ class LangSwitcherController extends Controller
         if (in_array($locale, array_keys(config('laravel-lang-switcher.languages')), true)) {
             session(['locale' => $locale]);
 
-            if (auth()->check()) {
-                auth()->user()->locale = $locale;
-                auth()->user()->save();
-            }
+            event(new LocaleWasChanged($locale));
         }
 
         return redirect()->back();

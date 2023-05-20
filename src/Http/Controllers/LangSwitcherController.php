@@ -11,7 +11,7 @@ class LangSwitcherController extends Controller
         if (array_key_exists($locale, config('laravel-lang-switcher.languages'))) {
             session(['locale' => $locale]);
 
-            event(new LocaleWasChanged($locale));
+            event(new LocaleWasChanged());
         }
 
         return redirect()->back();

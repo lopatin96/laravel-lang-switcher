@@ -2,14 +2,15 @@
 
 namespace Atin\LaravelLangSwitcher\Listeners;
 
-use Atin\LaravelLangSwitcher\Events\LocaleWasChanged;
+use App\Events\Event;
+use Illuminate\Support\Facades\App;
 
 class UpdateUserLocale
 {
-    public function handle(LocaleWasChanged $event)
+    public function handle(): void
     {
         if (auth()->check()) {
-            auth()->user()->locale = $event->locale;
+            auth()->user()->locale = App::getLocale();
             auth()->user()->save();
         }
     }

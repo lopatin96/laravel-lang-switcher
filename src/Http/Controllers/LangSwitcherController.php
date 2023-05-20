@@ -10,7 +10,8 @@ class LangSwitcherController extends Controller
             session(['locale' => $locale]);
 
             if (auth()->check()) {
-                auth()->user()->update(['locale' => $locale]);
+                auth()->user()->locale = $locale;
+                auth()->user()->save();
             }
         }
 

@@ -14,9 +14,14 @@ class LangSwitcherProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-lang-switcher');
         $this->loadTranslationsFrom(__DIR__.'/../lang', 'laravel-lang-switcher');
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-lang-switcher');
+
+        $this->publishes([
+            __DIR__.'/../database/migrations' => database_path('/migrations')
+        ], 'laravel-lang-switcher-migrations');
 
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-lang-switcher')

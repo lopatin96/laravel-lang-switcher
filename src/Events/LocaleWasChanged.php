@@ -9,7 +9,10 @@ class LocaleWasChanged
 {
     use Dispatchable;
 
-    public function __construct()
+    public $locale;
+
+    public function __construct(string $locale = null)
     {
+        $this->locale = $locale;
     }
 }

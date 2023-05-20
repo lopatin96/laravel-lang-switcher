@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\App;
 
 class UpdateUserLocale
 {
-    public function handle(): void
+    public function handle(Event $event)
     {
         if (auth()->check()) {
-            auth()->user()->locale = App::getLocale();
+            auth()->user()->locale = $event->locale ?? App::getLocale();
             auth()->user()->save();
         }
     }

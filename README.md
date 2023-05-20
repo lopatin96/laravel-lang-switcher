@@ -28,12 +28,16 @@ Add LangSwitcher middleware to middleware array in *app/Http/Kernel.php*:
     ];
 ```
 
-Fire **LocaleWasChanged** event in *app/Http/Kernel.php*:
+### Trait
+Add **HasLocale** trait to User model
+
 ```php
-  protected $middleware = [
-        …
-        \Atin\LaravelLangSwitcher\Http\Middleware\LangSwitcher::class,
-    ];
+
+use Atin\LaravelLangSwitcher\Traits\HasLocale;
+
+class User extends Authenticatable
+{
+    use HasLocale, …
 ```
 
 # Publishing

@@ -8,7 +8,7 @@ class LangSwitcherController extends Controller
 {
     public function __invoke(string $locale)
     {
-        if (in_array($locale, array_keys(config('laravel-lang-switcher.languages')), true)) {
+        if (array_key_exists($locale, config('laravel-lang-switcher.languages'))) {
             session(['locale' => $locale]);
 
             event(new LocaleWasChanged($locale));

@@ -28,6 +28,14 @@ Add LangSwitcher middleware to middleware array in *app/Http/Kernel.php*:
     ];
 ```
 
+Fire **LocaleWasChanged** event in *app/Http/Kernel.php*:
+```php
+  protected $middleware = [
+        …
+        \Atin\LaravelLangSwitcher\Http\Middleware\LangSwitcher::class,
+    ];
+```
+
 # Publishing
 ### Localization
 ```php

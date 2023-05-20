@@ -2,12 +2,10 @@
 
 namespace Atin\LaravelLangSwitcher\Traits;
 
-use Atin\LaravelLangSwitcher\Models\SocialAccount;
-
 trait HasLocale
 {
     public function locale()
     {
-        return $this->locale ?? 'en';
+        return array_key_exists($this->locale, config('laravel-lang-switcher.languages')) ? $this->locale : 'en';
     }
 }

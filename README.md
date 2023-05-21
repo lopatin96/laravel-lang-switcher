@@ -40,6 +40,12 @@ class User extends Authenticatable
     use HasLocale, …
 ```
 
+### Migrations
+Run migrations:
+```php
+php artisan migrate
+```
+
 # Publishing
 ### Migrations
 ```php

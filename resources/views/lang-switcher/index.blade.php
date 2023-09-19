@@ -2,7 +2,7 @@
 
 <x-dropdown align="{{ $align }}" width="40">
     <x-slot name="trigger">
-        <span {{ $attributes->merge(['class' => '']) }} >
+        <span {{ $attributes->merge(['class' => '']) }}>
             {{ __('laravel-lang-switcher::langs.Language') }}: {{ config("laravel-lang-switcher.languages." . session()->get('locale')) }}
         </span>
     </x-slot>

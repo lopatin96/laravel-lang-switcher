@@ -10,7 +10,7 @@ class LangSwitcher
 {
     public function handle(Request $request, Closure $next): mixed
     {
-        if (array_key_exists(request()->cookie('page_lang'), config('laravel-lang-switcher.languages'))) {
+        if (array_key_exists($request->input('lang') ?? request()->cookie('page_lang'), config('laravel-lang-switcher.languages'))) {
             $pageLang = request()->cookie('page_lang');
         }
 

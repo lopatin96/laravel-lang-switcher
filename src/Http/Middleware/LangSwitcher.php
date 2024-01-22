@@ -11,7 +11,7 @@ class LangSwitcher
     public function handle(Request $request, Closure $next): mixed
     {
         $locale = $request->session()->get('locale', 'en')
-            ?? $request->input('lang')
+            ?? $request->input('page_lang')
             ?? substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
 
         if (! array_key_exists($locale, config('laravel-lang-switcher.languages'))) {

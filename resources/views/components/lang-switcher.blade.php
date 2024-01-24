@@ -3,7 +3,7 @@
 <x-dropdown align="{{ $align }}" width="40">
     <x-slot name="trigger">
         <span {{ $attributes->merge(['class' => '']) }}>
-            {{ __('laravel-lang-switcher::langs.Language') }}: {{ config("laravel-lang-switcher.languages." . session()->get('locale')) }}
+            {{ __('laravel-lang-switcher::langs.Language') }}: {{ config("laravel-lang-switcher.languages." . app()->getLocale()) }}
         </span>
     </x-slot>
 
@@ -14,9 +14,9 @@
 
         @foreach(config('laravel-lang-switcher.languages') as $locale => $language)
             <x-dropdown-link
-                :href="route('locale', ['locale' => $locale])"
-                rel="nofollow"
-                class="cursor-pointer {{ $locale === session()->get('locale') ? 'bg-gray-100 font-semibold' : null }}"
+                    :href="route('locale', ['locale' => $locale])"
+                    rel="nofollow"
+                    class="cursor-pointer {{ $locale === app()->getLocale() ? 'bg-gray-100 font-semibold' : null }}"
             >
                 {{ config("laravel-lang-switcher.languages.$locale") }}
             </x-dropdown-link>

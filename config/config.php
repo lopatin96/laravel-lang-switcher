@@ -49,6 +49,6 @@ return [
         'nl' => [
             'currency' => 'EUR',
         ],
-    ]
+    ],
 
 ];

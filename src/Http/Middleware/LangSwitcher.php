@@ -12,6 +12,7 @@ class LangSwitcher
     {
         $lang = $request->input('country')
             ?? request()->cookie('locale')
+            ?? auth()->user()->locale
             ?? substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
 
         app()->setLocale(

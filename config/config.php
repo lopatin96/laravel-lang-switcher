@@ -7,6 +7,6 @@ return [
     'languages' => [
         'en' => 'English',
         'ru' => 'русский',
-    ]
+    ],
 
 ];

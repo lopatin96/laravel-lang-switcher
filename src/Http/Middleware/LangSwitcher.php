@@ -10,7 +10,8 @@ class LangSwitcher
 {
     public function handle(Request $request, Closure $next): mixed
     {
-        $lang = $request->input('country')
+        $lang = $request->input('locale')
+            ?? $request->input('country')
             ?? request()->cookie('locale')
             ?? auth()->user()->locale
             ?? substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);

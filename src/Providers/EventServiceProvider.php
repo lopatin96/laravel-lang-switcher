@@ -13,9 +13,6 @@ class EventServiceProvider extends ServiceProvider
         LocaleWasChanged::class => [
             UpdateUserLocale::class,
         ],
-        Login::class => [
-            UpdateUserLocale::class,
-        ],
     ];
 
     /**

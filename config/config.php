@@ -9,4 +9,13 @@ return [
         'ru' => 'русский',
     ],
 
+    'countries_to_locales' => [
+        'us' => 'en',
+        'in' => 'en',
+        'id' => 'en',
+        'pl' => 'pl',
+        'ru' => 'ru',
+        'ua' => 'uk',
+    ]
+
 ];

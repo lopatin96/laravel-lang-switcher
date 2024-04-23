@@ -64,5 +64,7 @@ class LangSwitcher
         ) {
             return $locale;
         }
+
+        return config('app.locale', 'en');
     }
 }

@@ -27,18 +27,42 @@ class LangSwitcher
 
     private function getLocale(Request $request): string
     {
-        foreach([
-            $request->input('locale'),
-            $request->input('country') ? config('laravel-lang-switcher.countries_to_locales')[$request->input('country')] ?? null : null,
-            $request->cookie('locale'),
-            is_object(Location::get($request->ip())) ? config('laravel-lang-switcher.countries_to_locales')[Str::lower(Str::limit(Location::get($request->ip())->countryCode, 2, ''))] ?? null : null,
-            substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2),
-        ] as $locale) {
-            if (array_key_exists($locale, config('laravel-lang-switcher.languages'))) {
-                return $locale;
-            }
+        if (
+            ($locale = $request->input('locale'))
+            && array_key_exists($locale, config('laravel-lang-switcher.languages'))
+        ) {
+            return $locale;
         }
 
-        return config('app.locale', 'en');
+        if (
+            ($country = $request->input('country'))
+            && array_key_exists($country, config('laravel-lang-switcher.countries_to_locales'))
+            && array_key_exists(config('laravel-lang-switcher.countries_to_locales')[$country], config('laravel-lang-switcher.languages'))
+        ) {
+            return config('laravel-lang-switcher.countries_to_locales')[$country];
+        }
+
+        if (
+            ($locale = $request->cookie('locale'))
+            && array_key_exists($locale, config('laravel-lang-switcher.languages'))
+        ) {
+            return $locale;
+        }
+
+        if (
+            ($location = Location::get($request->ip()))
+            && is_object($location)
+            && ($country = Str::lower(Str::limit(Location::get($request->ip())->countryCode, 2, '')))
+            && array_key_exists(config('laravel-lang-switcher.countries_to_locales')[$country], config('laravel-lang-switcher.languages'))
+        ) {
+            return config('laravel-lang-switcher.countries_to_locales')[$country];
+        }
+
+        if (
+            ($locale =substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2))
+            && array_key_exists($locale, config('laravel-lang-switcher.languages'))
+        ) {
+            return $locale;
+        }
     }
 }

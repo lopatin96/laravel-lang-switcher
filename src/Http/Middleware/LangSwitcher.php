@@ -4,6 +4,8 @@ namespace Atin\LaravelLangSwitcher\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Stevebauman\Location\Facades\Location;
+use Illuminate\Support\Str;
 
 class LangSwitcher
 {
@@ -29,6 +31,7 @@ class LangSwitcher
             $request->input('locale'),
             $request->input('country') ? config('laravel-lang-switcher.countries_to_locales')[$request->input('country')] ?? null : null,
             $request->cookie('locale'),
+            is_object(Location::get($request->ip())) ? config('laravel-lang-switcher.countries_to_locales')[Str::lower(Str::limit(Location::get($request->ip())->countryCode, 2, ''))] ?? null : null,
             substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2),
         ] as $locale) {
             if (array_key_exists($locale, config('laravel-lang-switcher.languages'))) {

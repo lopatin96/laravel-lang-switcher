@@ -53,6 +53,7 @@ class LangSwitcher
             ($location = Location::get($request->ip()))
             && is_object($location)
             && ($country = Str::lower(Str::limit(Location::get($request->ip())->countryCode, 2, '')))
+            && array_key_exists($country, config('laravel-lang-switcher.countries_to_locales'))
             && array_key_exists(config('laravel-lang-switcher.countries_to_locales')[$country], config('laravel-lang-switcher.languages'))
         ) {
             return config('laravel-lang-switcher.countries_to_locales')[$country];

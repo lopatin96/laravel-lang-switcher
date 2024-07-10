@@ -18,9 +18,9 @@
 
         @foreach(config('laravel-lang-switcher.languages') as $locale => $language)
             <x-dropdown-link
-                    :href="route('locale', ['locale' => $locale])"
-                    rel="nofollow"
-                    class="cursor-pointer {{ $locale === app()->getLocale() ? 'bg-gray-100 font-semibold' : null }}"
+                :href="route('locale', ['locale' => $locale])"
+                rel="nofollow"
+                class="cursor-pointer {{ $locale === app()->getLocale() ? 'bg-gray-100 font-semibold' : null }}"
             >
                 {{ config("laravel-lang-switcher.languages.$locale") }}
             </x-dropdown-link>

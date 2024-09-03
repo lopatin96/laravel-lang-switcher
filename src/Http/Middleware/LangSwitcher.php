@@ -60,7 +60,7 @@ class LangSwitcher
         }
 
         if (
-            ($locale =substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2))
+            ($locale = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2))
             && array_key_exists($locale, config('laravel-lang-switcher.languages'))
         ) {
             return $locale;

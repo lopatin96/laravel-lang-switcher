@@ -35,6 +35,10 @@ class LangSwitcherProvider extends ServiceProvider
         ], 'laravel-lang-switcher-views');
 
         $this->publishes([
+            __DIR__.'/../resources/images' => public_path('images/vendor/laravel-lang-switcher'),
+        ], 'laravel-lang-switcher-images');
+
+        $this->publishes([
             __DIR__.'/../lang' => $this->app->langPath('vendor/laravel-lang-switcher'),
         ], 'laravel-lang-switcher-lang');
 

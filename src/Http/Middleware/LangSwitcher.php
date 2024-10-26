@@ -12,12 +12,12 @@ class LangSwitcher
     public function handle(Request $request, Closure $next): mixed
     {
         if (auth()->check()) {
-            app()->setLocale(auth()->user()->locale ?? $this->getLocale($request));
+            app()->setLocale(auth()->user()->locale ?? static::getLocale($request));
 
             return $next($request);
         }
 
-        $locale = $this->getLocale($request);
+        $locale = static::getLocale($request);
 
         cookie()->queue(cookie('locale', $locale, config('laravel-lang-switcher.cookie_life_in_minutes', 43200)));
         app()->setLocale($locale);
@@ -25,7 +25,7 @@ class LangSwitcher
         return $next($request);
     }
 
-    private function getLocale(Request $request): string
+    public static function getLocale(Request $request): string
     {
         if (
             ($locale = $request->input('locale'))

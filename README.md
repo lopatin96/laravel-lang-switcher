@@ -28,6 +28,11 @@ Add LangSwitcher middleware to middleware array in *app/Http/Kernel.php*:
     ];
 ```
 
+Publish images
+```php
+php artisan vendor:publish --tag="laravel-lang-switcher-images"
+```
+
 ### Trait
 Add **HasLocale** trait to User model
 
@@ -39,6 +44,10 @@ class User extends Authenticatable
 {
     use HasLocale, …
 ```
+
+# Images
+Set of images
+https://flagicons.lipis.dev
 
 ### Migrations
 Run migrations:
@@ -60,6 +69,11 @@ php artisan vendor:publish --tag="laravel-lang-switcher-lang"
 ### Views
 ```php
 php artisan vendor:publish --tag="laravel-lang-switcher-views"
+```
+
+### Images
+```php
+php artisan vendor:publish --tag="laravel-lang-switcher-images"
 ```
 
 ### Config

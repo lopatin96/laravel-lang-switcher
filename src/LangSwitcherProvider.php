@@ -4,6 +4,7 @@ namespace Atin\LaravelLangSwitcher;
 
 use Atin\LaravelLangSwitcher\Providers\EventServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Auth\Events\Registered;
 
 class LangSwitcherProvider extends ServiceProvider
 {
@@ -15,6 +16,12 @@ class LangSwitcherProvider extends ServiceProvider
     public function boot()
     {
         $this->app->register(EventServiceProvider::class);
+
+        \Event::listen(Registered::class, static function ($event) {
+            $event->user->forceFill([
+                'locale' => request()->cookie('locale'),
+            ])->save();
+        });
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
@@ -33,6 +40,10 @@ class LangSwitcherProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-lang-switcher')
         ], 'laravel-lang-switcher-views');
+
+        $this->publishes([
+            __DIR__.'/../resources/images' => public_path('images/vendor/laravel-lang-switcher'),
+        ], 'laravel-lang-switcher-images');
 
         $this->publishes([
             __DIR__.'/../lang' => $this->app->langPath('vendor/laravel-lang-switcher'),

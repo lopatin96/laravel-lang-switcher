@@ -1,6 +1,6 @@
 @props(['align' => 'bottom'])
 
-<x-dropdown align="{{ $align }}" width="40">
+<x-dropdown align="{{ $align }}" width="36">
     <x-slot name="trigger">
         <div class="flex flex-col leading-tight cursor-pointer">
             <span class="text-xs font-mono opacity-75">change language</span>
@@ -20,9 +20,17 @@
             <x-dropdown-link
                 :href="route('locale', ['locale' => $locale])"
                 rel="nofollow"
-                class="cursor-pointer {{ $locale === app()->getLocale() ? 'bg-gray-100 font-semibold' : null }}"
+                class="flex items-center space-x-2 cursor-pointer {{ $locale === app()->getLocale() ? 'bg-gray-100 font-semibold' : null }}"
             >
-                {{ config("laravel-lang-switcher.languages.$locale") }}
+                <img
+                    class="w-5 rounded border"
+                    src="{{ asset('images/vendor/laravel-lang-switcher/' . $locale . '.svg') }}"
+                    alt="lang flag of {{ $locale }}"
+                />
+
+                <span>
+                    {{ config("laravel-lang-switcher.languages.$locale") }}
+                </span>
             </x-dropdown-link>
         @endforeach
     </x-slot>

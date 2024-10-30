@@ -23,9 +23,6 @@ class LangSwitcherController extends Controller
 
     private function getLangKeysToRedirect(): array
     {
-        return array_merge(
-            ['/'],
-            array_map(fn($langKey) => "/$langKey", array_keys(config('laravel-lang-switcher.languages')))
-        );
+        return array_merge(['/'], array_map(fn($langKey) => "/$langKey", array_keys(config('laravel-lang-switcher.languages'))));
     }
 }

@@ -11,13 +11,20 @@ class LangSwitcher
 {
     public function handle(Request $request, Closure $next): mixed
     {
+        $locale = auth()->user()->locale ?? static::getLocale();
+
+        if (
+            (in_array('/'.request()->path(), $this->getLangKeysToRedirect(), true))
+            && $locale !== request()->path()
+        ) {
+            return redirect("/locale/" . request()->path());
+        }
+
         if (auth()->check()) {
-            app()->setLocale(auth()->user()->locale ?? static::getLocale());
+            app()->setLocale($locale);
 
             return $next($request);
         }
-
-        $locale = static::getLocale();
 
         cookie()->queue(cookie('locale', $locale, config('laravel-lang-switcher.cookie_life_in_minutes', 43200)));
         app()->setLocale($locale);
@@ -67,5 +74,10 @@ class LangSwitcher
         }
 
         return config('app.locale', 'en');
+    }
+
+    private function getLangKeysToRedirect(): array
+    {
+        return array_merge(['/'], array_map(fn($langKey) => "/$langKey", array_keys(config('laravel-lang-switcher.languages'))));
     }
 }

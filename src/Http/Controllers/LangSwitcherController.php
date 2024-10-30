@@ -3,6 +3,7 @@
 namespace Atin\LaravelLangSwitcher\Http\Controllers;
 
 use Atin\LaravelLangSwitcher\Events\LocaleWasChanged;
+use Atin\LaravelLangSwitcher\Http\LangSwitcher;
 
 class LangSwitcherController extends Controller
 {

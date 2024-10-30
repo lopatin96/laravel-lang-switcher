@@ -4,6 +4,7 @@ namespace Atin\LaravelLangSwitcher;
 
 use Atin\LaravelLangSwitcher\Providers\EventServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Auth\Events\Registered;
 
 class LangSwitcherProvider extends ServiceProvider
 {
@@ -15,6 +16,12 @@ class LangSwitcherProvider extends ServiceProvider
     public function boot()
     {
         $this->app->register(EventServiceProvider::class);
+
+        \Event::listen(Registered::class, static function ($event) {
+            $event->user->forceFill([
+                'locale' => request()->cookie('locale'),
+            ])->save();
+        });
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 

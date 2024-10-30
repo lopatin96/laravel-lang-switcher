@@ -14,6 +14,18 @@ class LangSwitcherController extends Controller
             event(new LocaleWasChanged($locale));
         }
 
+        if (in_array(url()->previousPath(), $this->getLangKeysToRedirect(), true)) {
+            return redirect("/$locale");
+        }
+
         return redirect(url()->previousPath());
+    }
+
+    private function getLangKeysToRedirect(): array
+    {
+        return array_merge(
+            ['/'],
+            array_map(fn($langKey) => "/$langKey", array_diff(array_keys(config('laravel-lang-switcher.languages')), ['en']))
+        );
     }
 }

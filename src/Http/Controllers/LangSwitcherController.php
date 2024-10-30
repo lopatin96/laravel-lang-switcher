@@ -25,7 +25,7 @@ class LangSwitcherController extends Controller
     {
         return array_merge(
             ['/'],
-            array_map(fn($langKey) => "/$langKey", array_diff(array_keys(config('laravel-lang-switcher.languages')), ['en']))
+            array_map(fn($langKey) => "/$langKey", array_keys(config('laravel-lang-switcher.languages')))
         );
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Atin\LaravelLangSwitcher\Http\Middleware;
 
+use Atin\LaravelLangSwitcher\Helpers\LaravelLangSwitcherHelper;
 use Closure;
 use Illuminate\Http\Request;
 use Stevebauman\Location\Facades\Location;
@@ -14,7 +15,7 @@ class LangSwitcher
         $locale = auth()->user()->locale ?? static::getLocale();
 
         if (
-            (in_array('/'.request()->path(), $this->getLangKeysToRedirect(), true))
+            (in_array('/'.request()->path(), LaravelLangSwitcherHelper::getLangKeysToRedirect(), true))
             && $locale !== request()->path()
         ) {
             return redirect("/locale/" . request()->path());
@@ -74,10 +75,5 @@ class LangSwitcher
         }
 
         return config('app.locale', 'en');
-    }
-
-    private function getLangKeysToRedirect(): array
-    {
-        return array_merge(['/'], array_map(fn($langKey) => "/$langKey", array_keys(config('laravel-lang-switcher.languages'))));
     }
 }

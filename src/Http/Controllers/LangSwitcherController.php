@@ -3,6 +3,7 @@
 namespace Atin\LaravelLangSwitcher\Http\Controllers;
 
 use Atin\LaravelLangSwitcher\Events\LocaleWasChanged;
+use Atin\LaravelLangSwitcher\Helpers\LaravelLangSwitcherHelper;
 use Atin\LaravelLangSwitcher\Http\LangSwitcher;
 
 class LangSwitcherController extends Controller
@@ -15,15 +16,10 @@ class LangSwitcherController extends Controller
             event(new LocaleWasChanged($locale));
         }
 
-        if (in_array(url()->previousPath(), $this->getLangKeysToRedirect(), true)) {
+        if (in_array(url()->previousPath(), LaravelLangSwitcherHelper::getLangKeysToRedirect(), true)) {
             return redirect("/$locale");
         }
 
         return redirect(url()->previousPath());
-    }
-
-    private function getLangKeysToRedirect(): array
-    {
-        return array_merge(['/'], array_map(fn($langKey) => "/$langKey", array_keys(config('laravel-lang-switcher.languages'))));
     }
 }

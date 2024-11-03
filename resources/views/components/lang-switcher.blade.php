@@ -20,7 +20,7 @@
             <x-dropdown-link
                 :href="route('locale', ['locale' => $locale])"
                 rel="nofollow"
-                class="flex items-center space-x-2 cursor-pointer {{ $locale === app()->getLocale() ? 'bg-gray-100 font-semibold' : null }}"
+                class="flex items-center space-x-2 cursor-pointer {{ $locale === app()->getLocale() ? 'bg-gray-300 font-semibold animate-pulse' : null }}"
             >
                 <img
                     class="w-5 rounded border"

@@ -16,22 +16,32 @@
             {{ __('laravel-lang-switcher::langs.Select language') }}
         </div>
 
-        @foreach(config('laravel-lang-switcher.languages') as $locale => $language)
-            <x-dropdown-link
-                :href="route('locale', ['locale' => $locale])"
-                rel="nofollow"
-                class="flex items-center space-x-2 cursor-pointer {{ $locale === app()->getLocale() ? 'bg-gray-300 font-semibold animate-pulse' : null }}"
-            >
-                <img
-                    class="w-5 rounded border"
-                    src="{{ asset('images/vendor/laravel-lang-switcher/' . $locale . '.svg') }}"
-                    alt="lang flag of {{ $locale }}"
-                />
+        <div class="grid grid-cols-2 gap-4">
+            @php
+                $languages = config('laravel-lang-switcher.languages');
+                $half = ceil(count($languages) / 2);
+                $firstHalf = array_slice($languages, 0, $half, true);
+                $secondHalf = array_slice($languages, $half, null, true);
+            @endphp
 
-                <span>
-                    {{ config("laravel-lang-switcher.languages.$locale") }}
-                </span>
-            </x-dropdown-link>
-        @endforeach
+            @foreach([$firstHalf, $secondHalf] as $chunk)
+                @foreach($chunk as $locale => $language)
+                    <x-dropdown-link
+                        :href="route('locale', ['locale' => $locale])"
+                        rel="nofollow"
+                        class="flex items-center space-x-2 cursor-pointer {{ $locale === app()->getLocale() ? 'bg-gray-300 font-semibold animate-pulse' : null }}"
+                    >
+                        <img
+                            class="w-5 rounded border"
+                            src="{{ asset('images/vendor/laravel-lang-switcher/' . $locale . '.svg') }}"
+                            alt="lang flag of {{ $locale }}"
+                        />
+                        <span>
+                            {{ config("laravel-lang-switcher.languages.$locale") }}
+                        </span>
+                    </x-dropdown-link>
+                @endforeach
+            @endforeach
+        </div>
     </x-slot>
 </x-dropdown>

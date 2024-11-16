@@ -1,6 +1,6 @@
 @props(['align' => 'bottom'])
 
-<x-dropdown align="{{ $align }}" width="36">
+<x-dropdown align="{{ $align }}" width="72">
     <x-slot name="trigger">
         <div class="flex flex-col leading-tight cursor-pointer">
             <span class="text-xs font-mono opacity-75">change language</span>

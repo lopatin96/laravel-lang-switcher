@@ -16,7 +16,7 @@
             {{ __('laravel-lang-switcher::langs.Select language') }}
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2">
             @php
                 $languages = config('laravel-lang-switcher.languages');
                 $half = ceil(count($languages) / 2);

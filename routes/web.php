@@ -3,11 +3,11 @@
 use Atin\LaravelLangSwitcher\Http\Controllers\LangSwitcherController;
 
 Route::get('/locale/{locale}', LangSwitcherController::class)
-    ->whereIn('locale', array_values(config('laravel-lang-switcher.countries_to_locales')))
+    ->whereIn('locale', array_keys(config('laravel-lang-switcher.languages')))
     ->name('locale');
 
 Route::get('/{locale}', function ($locale) {
-    if (! in_array($locale, config('laravel-lang-switcher.countries_to_locales'))) {
+    if (! array_key_exists($locale, config('laravel-lang-switcher.languages'))) {
         return Redirect::to('/');
     }
 
@@ -21,5 +21,5 @@ Route::get('/{locale}', function ($locale) {
         'page' => 'index',
     ]);
 })
-    ->whereIn('locale', array_values(config('laravel-lang-switcher.countries_to_locales')));
+    ->whereIn('locale', array_keys(config('laravel-lang-switcher.languages')));
 

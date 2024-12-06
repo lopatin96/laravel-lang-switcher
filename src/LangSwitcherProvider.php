@@ -21,6 +21,8 @@ class LangSwitcherProvider extends ServiceProvider
             $event->user->forceFill([
                 'locale' => request()->cookie('locale'),
             ])->save();
+
+            cookie()->queue(cookie()->forget('locale'));
         });
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');

@@ -34,6 +34,7 @@
                         <img
                             class="w-5 rounded border"
                             src="{{ asset('images/vendor/laravel-lang-switcher/' . $locale . '.svg') }}"
+                            loading="lazy"
                             alt="lang flag of {{ $locale }}"
                         />
                         <span>

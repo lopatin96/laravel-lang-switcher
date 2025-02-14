@@ -20,7 +20,7 @@ class LangSwitcherController extends Controller
             return redirect("/$currentLocale");
         }
 
-        return view('laravel-pages::pages.index', [
+        return view(view()->exists('pages.index') ? 'pages.index' : 'laravel-pages::pages.index', [
             'page' => 'index',
         ]);
     }

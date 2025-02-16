@@ -17,7 +17,7 @@ class LangSwitcherController extends Controller
         if ($locale !== $currentLocale) {
             event(new LocaleWasChanged($currentLocale));
 
-            return redirect("/$currentLocale");
+            return redirect()->to("/$currentLocale" . (request()->getQueryString() ? '?' . request()->getQueryString() : ''));
         }
 
         return view(view()->exists('pages.index') ? 'pages.index' : 'laravel-pages::pages.index', [
